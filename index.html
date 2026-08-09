@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Your Pocket Gym</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--good:#15803d;--radius:20px}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+button,input{font:inherit} button{cursor:pointer;border:0}.app{max-width:680px;margin:auto;min-height:100vh;padding-bottom:90px}
+header{padding:24px 20px 10px}.brand{font-weight:800;font-size:24px}.sub{color:var(--muted);font-size:14px;margin-top:4px}
+main{padding:8px 16px}.screen{display:none}.screen.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:12px 0;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.hero{background:#111827;color:#fff}.hero .muted{color:#cbd5e1}.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:700;color:var(--muted)}h1,h2,h3,p{margin:0 0 8px}.hero h1{font-size:30px}.muted{color:var(--muted)}.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f8fafc;border-radius:16px;padding:14px}.stat b{display:block;font-size:22px}.primary{width:100%;padding:15px 18px;border-radius:15px;background:var(--accent);color:#fff;font-weight:750;margin-top:10px}.secondary{padding:11px 14px;border-radius:13px;background:#eef0f3;color:var(--ink);font-weight:650}.small{font-size:13px}.exercise{padding:14px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border-bottom:0}.setrow{display:grid;grid-template-columns:1fr 1fr 1fr 44px;gap:7px;margin-top:9px}.setrow input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}.check{border-radius:10px;background:#e5e7eb}.check.done{background:#15803d;color:#fff}.coach{display:flex;gap:10px;align-items:flex-start}.avatar{width:42px;height:42px;border-radius:50%;background:#111827;color:#fff;display:grid;place-items:center;font-weight:800;flex:none}.bubble{background:#f1f5f9;border-radius:16px;padding:12px 14px;line-height:1.45}.chatbox{display:flex;gap:8px;margin-top:10px}.chatbox input{flex:1;border:1px solid var(--line);border-radius:13px;padding:12px}.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}.nav-inner{width:min(680px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.nav button{padding:10px 4px;background:transparent;color:#6b7280;font-size:11px}.nav button.active{color:#111827;font-weight:800}.nav span{display:block;font-size:20px;margin-bottom:2px}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef0f3;font-size:12px;font-weight:700}.progressbar{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.progressbar div{height:100%;background:#111827;width:0}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;z-index:10}.modal.open{display:flex}.sheet{background:#fff;width:100%;max-width:680px;margin:auto;border-radius:24px 24px 0 0;padding:22px;max-height:90vh;overflow:auto}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+@media(min-width:681px){.nav{position:fixed}.sheet{margin-bottom:0}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">Your Pocket Gym</div><div class="sub">Your gym. Your program. Your progress.</div></header>
+<main>
+<section id="home" class="screen active">
+<div class="card hero"><div class="eyebrow muted">Today's recommendation</div><h1 id="homeTitle">Push — Strength & Muscle</h1><p class="muted" id="homeMeta">3 exercises • about 45 minutes</p><button class="primary" onclick="startWorkout()">Start today's workout</button></div>
+<div class="grid"><div class="stat"><span class="muted small">Workouts</span><b id="workoutsStat">0</b><span class="small muted">completed</span></div><div class="stat"><span class="muted small">Current streak</span><b id="streakStat">0</b><span class="small muted">days</span></div></div>
+<div class="card"><div class="row"><h3>Coach's note</h3><span class="pill">Adaptive</span></div><p id="coachNote">Log a workout and I'll start adjusting your training based on your performance.</p></div>
+<div class="card"><h3>Your goal</h3><p id="goalText" class="muted">Build muscle + get leaner</p></div>
+</section>
+
+<section id="workout" class="screen">
+<div class="row"><div><div class="eyebrow">Workout</div><h2 id="workoutTitle">Push</h2></div><button class="secondary" onclick="finishWorkout()">Finish</button></div>
+<div id="exerciseList"></div>
+<div class="card"><div class="row"><b>Rest timer</b><span id="timer">01:30</span></div><button class="secondary" onclick="startTimer()">Start 90 sec</button></div>
+</section>
+
+<section id="coach" class="screen">
+<div class="card"><div class="eyebrow">AI FITNESS COACH</div><h2>Coach</h2><p class="muted">Your coach uses your logged training to make practical recommendations.</p></div>
+<div id="chat"></div>
+<div class="card"><div class="chatbox"><input id="chatInput" placeholder="Ask: what should I do today?"><button class="primary" style="width:auto;margin:0" onclick="askCoach()">Send</button></div></div>
+</section>
+
+<section id="progress" class="screen">
+<div class="card"><div class="eyebrow">Progress</div><h2>Training dashboard</h2><div class="grid"><div class="stat"><span class="muted small">Sessions</span><b id="pSessions">0</b></div><div class="stat"><span class="muted small">Sets logged</span><b id="pSets">0</b></div></div></div>
+<div class="card"><h3>Consistency</h3><p class="muted small">Complete workouts to build your streak.</p><div class="progressbar" style="margin-top:12px"><div id="progressFill"></div></div></div>
+<div class="card"><h3>Recent workouts</h3><div id="history">No workouts yet.</div></div>
+</section>
+
+<section id="profile" class="screen">
+<div class="card"><div class="eyebrow">Profile</div><h2>Your setup</h2>
+<div class="field"><label>Goal</label><select id="goal"><option>Build muscle + get leaner</option><option>Build muscle</option><option>Lose fat</option><option>Get stronger</option><option>General fitness</option></select></div>
+<div class="field"><label>Training days / week</label><select id="days"><option>3</option><option>4</option><option>5</option></select></div>
+<div class="field"><label>Typical workout length</label><select id="duration"><option>30 minutes</option><option selected>45 minutes</option><option>60 minutes</option><option>90 minutes</option></select></div>
+<button class="primary" onclick="saveProfile()">Save setup</button></div>
+<div class="card"><h3>Coming next</h3><p class="muted">Exercise substitutions, smarter progression, nutrition targets, body measurements, progress photos, and a real AI coaching connection.</p></div>
+</section>
+</main>
+</div>
+
+<div class="nav"><div class="nav-inner">
+<button class="active" onclick="show('home',this)"><span>⌂</span>Home</button>
+<button onclick="show('workout',this)"><span>🏋️</span>Workout</button>
+<button onclick="show('coach',this)"><span>✦</span>Coach</button>
+<button onclick="show('progress',this)"><span>↗</span>Progress</button>
+<button onclick="show('profile',this)"><span>⚙</span>Profile</button>
+</div></div>
+
+<script>
+const key='ypg_v1';
+let state=JSON.parse(localStorage.getItem(key)||'null')||{
+ profile:{goal:'Build muscle + get leaner',days:3,duration:'45 minutes'},
+ workouts:[], current:null
+};
+const plans=[
+ {name:'Push', exercises:[
+  {name:'Chest Press',sets:3,min:8,max:12,weight:80},
+  {name:'Shoulder Press',sets:3,min:8,max:12,weight:50},
+  {name:'Cable Triceps Pushdown',sets:3,min:10,max:15,weight:40}]},
+ {name:'Pull', exercises:[
+  {name:'Lat Pulldown',sets:3,min:8,max:12,weight:80},
+  {name:'Seated Cable Row',sets:3,min:8,max:12,weight:80},
+  {name:'Biceps Curl Machine',sets:3,min:10,max:15,weight:40}]},
+ {name:'Legs', exercises:[
+  {name:'Leg Press',sets:3,min:8,max:12,weight:180},
+  {name:'Leg Curl',sets:3,min:10,max:15,weight:60},
+  {name:'Leg Extension',sets:3,min:10,max:15,weight:60}]}
+];
+function save(){localStorage.setItem(key,JSON.stringify(state));}
+function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='progress')renderProgress();if(id==='coach')renderChat();}
+function planForToday(){return plans[state.workouts.length%plans.length]}
+function startWorkout(){
+ const p=planForToday();
+ state.current={name:p.name,start:Date.now(),exercises:p.exercises.map(e=>{
+   const prior=[...state.workouts].reverse().flatMap(w=>w.exercises||[]).find(x=>x.name===e.name);
+   let suggested=e.weight;
+   if(prior&&prior.sets.every(s=>Number(s.reps)>=e.max)) suggested=Math.round(prior.weight*1.05/5)*5;
+   return {...e,weight:suggested,sets:Array.from({length:e.sets},()=>({reps:'',done:false}))};
+ })};
+ save();renderWorkout();show('workout',document.querySelectorAll('.nav button')[1]);
+}
+function renderWorkout(){
+ if(!state.current)return;
+ document.getElementById('workoutTitle').textContent=state.current.name;
+ document.getElementById('exerciseList').innerHTML=state.current.exercises.map((e,ei)=>`
+ <div class="card exercise"><div class="row"><div><b>${e.name}</b><div class="muted small">${e.min}–${e.max} reps • Suggested ${e.weight} lb</div></div><span class="pill">${e.sets} sets</span></div>
+ ${e.sets.map((s,si)=>`<div class="setrow"><span class="small muted" style="padding:11px 0">Set ${si+1}</span><input type="number" placeholder="lb" value="${e.weight}" onchange="setWeight(${ei},${si},this.value)"><input type="number" placeholder="reps" value="${s.reps}" onchange="setReps(${ei},${si},this.value)"><button class="check ${s.done?'done':''}" onclick="toggleSet(${ei},${si},this)">${s.done?'✓':'○'}</button></div>`).join('')}</div>`).join('');
+}
+function setWeight(e,s,v){state.current.exercises[e].weight=Number(v)||0;save()}
+function setReps(e,s,v){state.current.exercises[e].sets[s].reps=v;save()}
+function toggleSet(e,s,el){state.current.exercises[e].sets[s].done=!state.current.exercises[e].sets[s].done;save();renderWorkout()}
+function finishWorkout(){
+ if(!state.current)return;
+ state.workouts.push({...state.current,end:Date.now()});state.current=null;save();updateHome();alert('Workout saved. Your next workout will adapt to your performance.');
+ show('home',document.querySelectorAll('.nav button')[0]);
+}
+let timerId;
+function startTimer(){let n=90;clearInterval(timerId);document.getElementById('timer').textContent='01:30';timerId=setInterval(()=>{n--;document.getElementById('timer').textContent=`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;if(n<=0){clearInterval(timerId);navigator.vibrate?.(300);}},1000)}
+function updateHome(){
+ document.getElementById('workoutsStat').textContent=state.workouts.length;
+ document.getElementById('pSessions').textContent=state.workouts.length;
+ document.getElementById('goalText').textContent=state.profile.goal;
+ const p=planForToday();document.getElementById('homeTitle').textContent=p.name+' — Strength & Muscle';
+ const total=p.exercises.length*3;document.getElementById('homeMeta').textContent=`${total} sets • about ${state.profile.duration.replace(' minutes','')} minutes`;
+ document.getElementById('coachNote').textContent=state.workouts.length?coachSummary():'Log a workout and I’ll start adjusting your training based on your performance.';
+ document.getElementById('streakStat').textContent=Math.min(state.workouts.length,7);
+}
+function coachSummary(){
+ const last=state.workouts.at(-1), completed=(last.exercises||[]).flatMap(e=>e.sets).filter(s=>s.done).length;
+ return `Nice work. You logged ${completed} completed sets last session. I’ll use your reps and weights to decide when you should add reps, hold steady, or increase load.`;
+}
+function renderProgress(){
+ const sets=state.workouts.flatMap(w=>w.exercises||[]).flatMap(e=>e.sets||[]).length;
+ document.getElementById('pSets').textContent=sets;
+ document.getElementById('progressFill').style.width=Math.min(100,(state.workouts.length%4)/4*100)+'%';
+ document.getElementById('history').innerHTML=state.workouts.length?state.workouts.slice().reverse().slice(0,8).map(w=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${w.name}</b><div class="muted small">${new Date(w.start).toLocaleDateString()} • ${w.exercises.length} exercises</div></div>`).join(''):'No workouts yet.';
+}
+function saveProfile(){
+ state.profile.goal=document.getElementById('goal').value;state.profile.days=Number(document.getElementById('days').value);state.profile.duration=document.getElementById('duration').value;save();updateHome();alert('Setup saved.');
+}
+function renderChat(){
+ if(document.getElementById('chat').children.length)return;
+ addCoach(`I'm your Pocket Gym coach. I can help you plan today's session, interpret your workout history, suggest progression, and adapt around time or equipment changes. What do you want to work on?`);
+}
+function addCoach(text){document.getElementById('chat').insertAdjacentHTML('beforeend',`<div class="coach" style="margin:12px 0"><div class="avatar">PG</div><div class="bubble">${text}</div></div>`)}
+function askCoach(){
+ const input=document.getElementById('chatInput'),q=input.value.trim();if(!q)return;
+ document.getElementById('chat').insertAdjacentHTML('beforeend',`<div class="card" style="margin-left:42px"><b>You</b><p>${q.replace(/[<>]/g,'')}</p></div>`);
+ let a;
+ const l=q.toLowerCase();
+ if(l.includes('today')||l.includes('workout')){const p=planForToday();a=`Today I'd run <b>${p.name}</b>. Start with ${p.exercises[0].name}, then move through the remaining ${p.exercises.length-1} exercises. Use the suggested load shown in the workout screen and try to improve your reps before adding weight.`}
+ else if(l.includes('30')||l.includes('time')) a='If you only have 30 minutes, keep the first two exercises and do 2 hard working sets each. Skip isolation work rather than rushing every set.';
+ else if(l.includes('progress')||l.includes('weight')) a=state.workouts.length?coachSummary():'Once you log a few sessions, I can make progression recommendations from your actual numbers.';
+ else a='For this first prototype I can answer common training questions and use your logged workouts. The next version can connect a real AI model so the coach can have a much deeper conversation while still seeing your training data.';
+ addCoach(a);input.value='';
+}
+document.getElementById('goal').value=state.profile.goal;document.getElementById('days').value=state.profile.days;document.getElementById('duration').value=state.profile.duration;
+updateHome();renderProgress();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>

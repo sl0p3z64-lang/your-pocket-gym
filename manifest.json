@@ -1,0 +1,10 @@
+{
+  "name": "Your Pocket Gym",
+  "short_name": "Pocket Gym",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f7",
+  "theme_color": "#111827",
+  "description": "Adaptive workout tracker and AI fitness coach prototype.",
+  "icons": []
+}
