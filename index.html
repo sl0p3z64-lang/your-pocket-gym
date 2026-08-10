@@ -1,27 +1,161 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#06152f"><link rel="manifest" href="manifest.json"><title>Your Pocket Gym V2</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Your Pocket Gym</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600;700;800&display=swap');
-:root{--bg:#030914;--p:#07162f;--p2:#0b2042;--b:#29a8ff;--o:#ff7a18;--w:#f5f9ff;--m:#8fa4c4;--l:#17345d;--g:#20c77a}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#020814,#06152f 70%,#030914);color:var(--w);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif}.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:96px}header{padding:24px 20px 12px;display:flex;justify-content:space-between;align-items:center}.brand,.display{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase}.brand{font-size:29px;font-weight:800}.brand span,.accent{color:var(--b)}.avatarTop,.bigAvatar{display:grid;place-items:center;background:linear-gradient(135deg,#1677ff,#063d91);font-weight:800}.avatarTop{width:40px;height:40px;border-radius:50%}main{padding:8px 16px}.screen{display:none}.screen.active{display:block}.display{letter-spacing:.03em}.greeting{font-size:42px;line-height:.95;margin:12px 0 4px}.sub,.muted{color:var(--m)}.sub{font-size:14px}.card{background:linear-gradient(145deg,var(--p2),var(--p));border:1px solid var(--l);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 10px 30px #0003}.hero{padding:22px}.hero h2{font-size:42px;line-height:.9;margin:5px 0}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800;color:var(--m)}h2,h3,p{margin:0 0 8px}.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#06142b;border:1px solid var(--l);border-radius:16px;padding:15px}.stat b{display:block;font-size:25px}.primary{width:100%;padding:15px;border:0;border-radius:15px;background:linear-gradient(90deg,#1677ff,var(--b));color:#fff;font-weight:800;margin-top:10px}.secondary{padding:11px 14px;border-radius:13px;background:#10284b;color:#fff;font-weight:700;border:1px solid var(--l)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#0d315c;color:#8ed2ff;font-size:11px;font-weight:800}.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 8px}.sectionTitle h3{font-family:"Barlow Condensed";font-size:24px;text-transform:uppercase}.exercise{padding:15px 0;border-bottom:1px solid var(--l)}.setrow{display:grid;grid-template-columns:42px 1fr 1fr 45px;gap:7px;margin-top:9px}.setrow input,.chatbox input,.field input,.field select{width:100%;padding:11px;border:1px solid var(--l);border-radius:10px;background:#06142b;color:#fff}.check{border-radius:10px;background:#10284b;color:#8fa4c4;border:1px solid var(--l)}.check.done{background:var(--g);color:#fff}.chat{display:flex;gap:10px;align-items:flex-start}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1677ff,var(--b));display:grid;place-items:center;font-weight:900;flex:none}.bubble{background:#10284b;border:1px solid var(--l);border-radius:16px;padding:12px 14px;line-height:1.45}.chatbox{display:flex;gap:8px}.nav{position:fixed;bottom:0;left:0;right:0;background:#030914f2;backdrop-filter:blur(16px);border-top:1px solid var(--l);z-index:5}.nav-inner{width:min(720px,100%);margin:auto;display:grid;grid-template-columns:repeat(5,1fr)}.nav button{padding:10px 4px;background:transparent;color:#6f86a8;font-size:10px;border:0}.nav button.active{color:var(--b);font-weight:800}.nav span{display:block;font-size:20px;margin-bottom:2px}.profileHero{display:flex;gap:14px;align-items:center}.bigAvatar{width:70px;height:70px;border-radius:22px;font-size:30px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--m);margin-bottom:6px}.choice{padding:16px;border:1px solid var(--l);border-radius:16px;background:#06142b;margin:10px 0}.choice.selected{border-color:var(--b);box-shadow:0 0 0 1px var(--b) inset}.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;z-index:10}.modal.open{display:flex}.sheet{background:#07162f;width:100%;max-width:720px;margin:auto;border-radius:24px 24px 0 0;padding:22px;max-height:90vh;overflow:auto;border:1px solid var(--l)}.close{float:right;background:#10284b;color:#fff;border:0;border-radius:10px;padding:8px}.empty{text-align:center;color:var(--m);padding:24px}
-</style></head><body><div class="app"><header><div class="brand">Your Pocket <span>Gym</span></div><div class="avatarTop" id="topInitials" onclick="show('profile',document.querySelectorAll('.nav button')[4])">PG</div></header><main>
-<section id="home" class="screen active"><div id="greeting" class="display greeting"></div><p id="dateLine" class="sub"></p><div class="card hero"><div class="eyebrow">Today's training</div><h2 id="homeTitle" class="display">PUSH DAY</h2><p id="homeMeta" class="muted">Chest • Shoulders • Triceps</p><button class="primary" onclick="startWorkout()">START WORKOUT →</button></div><div class="grid"><div class="stat"><span class="muted">STREAK</span><b id="streak">0 🔥</b></div><div class="stat"><span class="muted">WORKOUTS</span><b id="sessions">0</b></div></div><div class="sectionTitle"><h3>Coach's Note</h3><span class="pill">Adaptive</span></div><div class="card"><div class="chat"><div class="avatar">PG</div><div id="note">Log your first workout and Pocket Gym will start learning your training.</div></div></div></section>
-<section id="workout" class="screen"><div class="row"><div><div class="eyebrow">Live session</div><h2 id="wt" class="display">PUSH DAY</h2></div><button class="secondary" onclick="finish()">FINISH</button></div><div id="exercises"></div><div class="card"><div class="row"><div><div class="eyebrow">Rest Timer</div><h2 id="timer" class="display">01:30</h2></div><button class="primary" style="width:auto;margin:0" onclick="timer()">START</button></div></div></section>
-<section id="coach" class="screen"><div class="card"><div class="eyebrow">Your coach</div><h2 class="display">COACH</h2><p class="muted">Ask about training, progression, substitutions, or your workouts.</p></div><div id="chat"></div><div class="card"><div class="chatbox"><input id="q" placeholder="Ask your coach..."><button class="primary" style="width:auto;margin:0" onclick="ask()">SEND</button></div></div></section>
-<section id="progress" class="screen"><div class="eyebrow">Your numbers</div><h2 class="display">PROGRESS</h2><div class="grid"><div class="stat"><span class="muted">SESSIONS</span><b id="ps">0</b></div><div class="stat"><span class="muted">SETS LOGGED</span><b id="sets">0</b></div></div><div class="sectionTitle"><h3>Recent Workouts</h3></div><div class="card" id="history"><div class="empty">Your completed workouts will appear here.</div></div></section>
-<section id="profile" class="screen"><div class="card profileHero"><div class="bigAvatar" id="bigInitials">PG</div><div><div class="eyebrow">Athlete profile</div><h2 id="profileName" class="display">YOUR PROFILE</h2><p id="summary" class="muted">Set up your details.</p></div></div><div class="card"><div class="field"><label>Name</label><input id="name" placeholder="Your name"></div><div class="grid"><div class="field"><label>Age</label><input id="age" type="number"></div><div class="field"><label>Weight (lb)</label><input id="weight" type="number"></div></div><div class="field"><label>Height</label><input id="height" placeholder="5'10&quot;"></div><div class="field"><label>Goal</label><select id="goal"><option>Build muscle + get leaner</option><option>Build muscle</option><option>Lose fat</option><option>Get stronger</option><option>General fitness</option></select></div><button class="primary" onclick="saveProfile()">SAVE PROFILE</button></div><div class="sectionTitle"><h3>Training Setup</h3></div><div class="card"><div class="choice selected" id="adaptive" onclick="mode('adaptive')"><b>🧠 Pocket Gym Program</b><p class="muted">Let Pocket Gym build your training.</p></div><div class="choice" id="custom" onclick="mode('custom')"><b>📋 My Own Program</b><p class="muted">Enter your own plan and use Pocket Gym as your tracker.</p></div><button class="secondary" style="width:100%" onclick="openBuilder()">OPEN PROGRAM BUILDER</button></div></section></main></div>
-<div class="nav"><div class="nav-inner"><button class="active" onclick="show('home',this)"><span>⌂</span>HOME</button><button onclick="show('workout',this)"><span>🏋️</span>WORKOUT</button><button onclick="show('coach',this)"><span>✦</span>COACH</button><button onclick="show('progress',this)"><span>↗</span>PROGRESS</button><button onclick="show('profile',this)"><span>●</span>PROFILE</button></div></div>
-<div id="modal" class="modal"><div class="sheet"><button class="close" onclick="closeBuilder()">✕</button><div class="eyebrow">Custom training</div><h2 class="display">BUILD MY PROGRAM</h2><p class="muted">Add workout days and exercises.</p><div id="days"></div><button class="secondary" style="width:100%" onclick="addDay()">+ ADD WORKOUT DAY</button><button class="primary" onclick="saveProgram()">SAVE MY PROGRAM</button></div></div>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--good:#15803d;--radius:20px}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+button,input{font:inherit} button{cursor:pointer;border:0}.app{max-width:680px;margin:auto;min-height:100vh;padding-bottom:90px}
+header{padding:24px 20px 10px}.brand{font-weight:800;font-size:24px}.sub{color:var(--muted);font-size:14px;margin-top:4px}
+main{padding:8px 16px}.screen{display:none}.screen.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:12px 0;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.hero{background:#111827;color:#fff}.hero .muted{color:#cbd5e1}.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:700;color:var(--muted)}h1,h2,h3,p{margin:0 0 8px}.hero h1{font-size:30px}.muted{color:var(--muted)}.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f8fafc;border-radius:16px;padding:14px}.stat b{display:block;font-size:22px}.primary{width:100%;padding:15px 18px;border-radius:15px;background:var(--accent);color:#fff;font-weight:750;margin-top:10px}.secondary{padding:11px 14px;border-radius:13px;background:#eef0f3;color:var(--ink);font-weight:650}.small{font-size:13px}.exercise{padding:14px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border-bottom:0}.setrow{display:grid;grid-template-columns:1fr 1fr 1fr 44px;gap:7px;margin-top:9px}.setrow input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}.check{border-radius:10px;background:#e5e7eb}.check.done{background:#15803d;color:#fff}.coach{display:flex;gap:10px;align-items:flex-start}.avatar{width:42px;height:42px;border-radius:50%;background:#111827;color:#fff;display:grid;place-items:center;font-weight:800;flex:none}.bubble{background:#f1f5f9;border-radius:16px;padding:12px 14px;line-height:1.45}.chatbox{display:flex;gap:8px;margin-top:10px}.chatbox input{flex:1;border:1px solid var(--line);border-radius:13px;padding:12px}.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}.nav-inner{width:min(680px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.nav button{padding:10px 4px;background:transparent;color:#6b7280;font-size:11px}.nav button.active{color:#111827;font-weight:800}.nav span{display:block;font-size:20px;margin-bottom:2px}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef0f3;font-size:12px;font-weight:700}.progressbar{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.progressbar div{height:100%;background:#111827;width:0}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;z-index:10}.modal.open{display:flex}.sheet{background:#fff;width:100%;max-width:680px;margin:auto;border-radius:24px 24px 0 0;padding:22px;max-height:90vh;overflow:auto}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+@media(min-width:681px){.nav{position:fixed}.sheet{margin-bottom:0}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">Your Pocket Gym</div><div class="sub">Your gym. Your program. Your progress.</div></header>
+<main>
+<section id="home" class="screen active">
+<div class="card hero"><div class="eyebrow muted">Today's recommendation</div><h1 id="homeTitle">Push — Strength & Muscle</h1><p class="muted" id="homeMeta">3 exercises • about 45 minutes</p><button class="primary" onclick="startWorkout()">Start today's workout</button></div>
+<div class="grid"><div class="stat"><span class="muted small">Workouts</span><b id="workoutsStat">0</b><span class="small muted">completed</span></div><div class="stat"><span class="muted small">Current streak</span><b id="streakStat">0</b><span class="small muted">days</span></div></div>
+<div class="card"><div class="row"><h3>Coach's note</h3><span class="pill">Adaptive</span></div><p id="coachNote">Log a workout and I'll start adjusting your training based on your performance.</p></div>
+<div class="card"><h3>Your goal</h3><p id="goalText" class="muted">Build muscle + get leaner</p></div>
+</section>
+
+<section id="workout" class="screen">
+<div class="row"><div><div class="eyebrow">Workout</div><h2 id="workoutTitle">Push</h2></div><button class="secondary" onclick="finishWorkout()">Finish</button></div>
+<div id="exerciseList"></div>
+<div class="card"><div class="row"><b>Rest timer</b><span id="timer">01:30</span></div><button class="secondary" onclick="startTimer()">Start 90 sec</button></div>
+</section>
+
+<section id="coach" class="screen">
+<div class="card"><div class="eyebrow">AI FITNESS COACH</div><h2>Coach</h2><p class="muted">Your coach uses your logged training to make practical recommendations.</p></div>
+<div id="chat"></div>
+<div class="card"><div class="chatbox"><input id="chatInput" placeholder="Ask: what should I do today?"><button class="primary" style="width:auto;margin:0" onclick="askCoach()">Send</button></div></div>
+</section>
+
+<section id="progress" class="screen">
+<div class="card"><div class="eyebrow">Progress</div><h2>Training dashboard</h2><div class="grid"><div class="stat"><span class="muted small">Sessions</span><b id="pSessions">0</b></div><div class="stat"><span class="muted small">Sets logged</span><b id="pSets">0</b></div></div></div>
+<div class="card"><h3>Consistency</h3><p class="muted small">Complete workouts to build your streak.</p><div class="progressbar" style="margin-top:12px"><div id="progressFill"></div></div></div>
+<div class="card"><h3>Recent workouts</h3><div id="history">No workouts yet.</div></div>
+</section>
+
+<section id="profile" class="screen">
+<div class="card"><div class="eyebrow">Profile</div><h2>Your setup</h2>
+<div class="field"><label>Goal</label><select id="goal"><option>Build muscle + get leaner</option><option>Build muscle</option><option>Lose fat</option><option>Get stronger</option><option>General fitness</option></select></div>
+<div class="field"><label>Training days / week</label><select id="days"><option>3</option><option>4</option><option>5</option></select></div>
+<div class="field"><label>Typical workout length</label><select id="duration"><option>30 minutes</option><option selected>45 minutes</option><option>60 minutes</option><option>90 minutes</option></select></div>
+<button class="primary" onclick="saveProfile()">Save setup</button></div>
+<div class="card"><h3>Coming next</h3><p class="muted">Exercise substitutions, smarter progression, nutrition targets, body measurements, progress photos, and a real AI coaching connection.</p></div>
+</section>
+</main>
+</div>
+
+<div class="nav"><div class="nav-inner">
+<button class="active" onclick="show('home',this)"><span>⌂</span>Home</button>
+<button onclick="show('workout',this)"><span>🏋️</span>Workout</button>
+<button onclick="show('coach',this)"><span>✦</span>Coach</button>
+<button onclick="show('progress',this)"><span>↗</span>Progress</button>
+<button onclick="show('profile',this)"><span>⚙</span>Profile</button>
+</div></div>
+
 <script>
-const K='ypg_v2';let s=JSON.parse(localStorage.getItem(K)||'null')||{p:{name:'Mason',age:'',height:'',weight:'',goal:'Build muscle + get leaner'},mode:'adaptive',workouts:[],days:[]};
-const plans=[['Push Day','Chest • Shoulders • Triceps',[['Chest Press',3,8,12,80],['Shoulder Press',3,8,12,50],['Cable Triceps Pushdown',3,10,15,40]]],['Pull Day','Back • Rear Delts • Biceps',[['Lat Pulldown',3,8,12,80],['Seated Cable Row',3,8,12,80],['Biceps Curl Machine',3,10,15,40]]],['Leg Day','Quads • Hamstrings • Glutes',[['Leg Press',3,8,12,180],['Leg Curl',3,10,15,60],['Leg Extension',3,10,15,60]]]];
-function save(){localStorage.setItem(K,JSON.stringify(s))}function ini(){return(s.p.name||'PG').split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase()}function greet(){let h=new Date().getHours(),g=h<12?'GOOD MORNING':h<18?'GOOD AFTERNOON':'GOOD EVENING';greeting.innerHTML=g+', <span class="accent">'+(s.p.name||'ATHLETE').toUpperCase()+'</span>';dateLine.textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})}
-function show(id,b){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(id==='progress')progress();if(id==='coach'&&!chat.children.length)coach('Hey '+(s.p.name||'there')+' 👊 Ask me about your training.')}function plan(){if(s.mode==='custom'&&s.days.length){let d=s.days[s.workouts.length%s.days.length];return[d.name,'Your program',d.e.map(x=>[x.n,+x.sets,+x.min||8,+x.max||12,+x.w||0])]}return plans[s.workouts.length%3]}
-function startWorkout(){let p=plan();s.cur={name:p[0],start:Date.now(),e:p[2].map(x=>({name:x[0],count:x[1],min:x[2],max:x[3],w:x[4],sets:Array.from({length:x[1]},()=>({r:'',d:false}))}))};save();renderWorkout();show('workout',document.querySelectorAll('.nav button')[1])}
-function renderWorkout(){wt.textContent=s.cur.name.toUpperCase();exercises.innerHTML=s.cur.e.map((e,i)=>'<div class="card exercise"><div class="row"><div><b>'+e.name+'</b><div class="muted">'+e.min+'–'+e.max+' reps'+(e.w?' • '+e.w+' lb':'')+'</div></div><span class="pill">'+e.count+' SETS</span></div>'+e.sets.map((x,j)=>'<div class="setrow"><span class="muted">S'+(j+1)+'</span><input type="number" value="'+e.w+'" onchange="s.cur.e['+i+'].w=this.value;save()"><input type="number" placeholder="reps" value="'+x.r+'" onchange="s.cur.e['+i+'].sets['+j+'].r=this.value;save()"><button class="check '+(x.d?'done':'')+'" onclick="toggle('+i+','+j+')">'+(x.d?'✓':'○')+'</button></div>').join('')+'</div>').join('')}
-function toggle(i,j){s.cur.e[i].sets[j].d=!s.cur.e[i].sets[j].d;save();renderWorkout()}function finish(){if(!s.cur)return;s.workouts.push(s.cur);s.cur=null;save();update();alert('Workout saved!');show('home',document.querySelectorAll('.nav button')[0])}let ti;function timer(){let n=90;clearInterval(ti);ti=setInterval(()=>{n--;document.getElementById('timer').textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');if(n<=0)clearInterval(ti)},1000)}
-function update(){greet();topInitials.textContent=ini();bigInitials.textContent=ini();sessions.textContent=s.workouts.length;streak.textContent=s.workouts.length+' 🔥';let p=plan();homeTitle.textContent=p[0].toUpperCase();homeMeta.textContent=p[1];note.textContent=s.workouts.length?'You have '+s.workouts.length+' completed session'+(s.workouts.length>1?'s':'')+'. Keep logging sets and Pocket Gym will learn your training.':'Log your first workout and Pocket Gym will start learning your training.'}
-function load(){name.value=s.p.name||'';age.value=s.p.age||'';weight.value=s.p.weight||'';height.value=s.p.height||'';goal.value=s.p.goal||'';profileName.textContent=(s.p.name||'YOUR PROFILE').toUpperCase();summary.textContent=s.p.age&&s.p.weight?s.p.age+' years • '+(s.p.height||'Height not set')+' • '+s.p.weight+' lb':'Set up your details.';document.getElementById(s.mode).classList.add('selected')}
-function saveProfile(){s.p={name:name.value.trim()||'Athlete',age:age.value,height:height.value,weight:weight.value,goal:goal.value};save();load();update();alert('Profile saved.')}function mode(x){s.mode=x;document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));document.getElementById(x).classList.add('selected');save()}
-function openBuilder(){modal.classList.add('open');renderDays()}function closeBuilder(){modal.classList.remove('open')}function addDay(){s.days.push({name:'Day '+(s.days.length+1),e:[{n:'',sets:3,min:8,max:12,w:''}]});renderDays()}function renderDays(){days.innerHTML=s.days.map((d,i)=>'<div class="card"><div class="field"><label>Workout day</label><input value="'+d.name+'" onchange="s.days['+i+'].name=this.value"></div>'+d.e.map((x,j)=>'<div class="field"><label>Exercise</label><input value="'+x.n+'" placeholder="Chest Press" onchange="s.days['+i+'].e['+j+'].n=this.value"></div><div class="grid"><div class="field"><label>Sets</label><input type="number" value="'+x.sets+'" onchange="s.days['+i+'].e['+j+'].sets=this.value"></div><div class="field"><label>Rep range</label><input value="'+x.min+'-'+x.max+'" onchange="let z=this.value.split('-');s.days['+i+'].e['+j+'].min=z[0];s.days['+i+'].e['+j+'].max=z[1]||z[0]"></div></div><div class="field"><label>Starting weight</label><input type="number" value="'+x.w+'" onchange="s.days['+i+'].e['+j+'].w=this.value"></div>').join('')+'<button class="secondary" onclick="s.days['+i+'].e.push({n:"",sets:3,min:8,max:12,w:""});renderDays()">+ ADD EXERCISE</button></div>').join('')}function saveProgram(){s.mode='custom';save();closeBuilder();update();alert('Your custom program is saved.')}
-function coach(t){chat.insertAdjacentHTML('beforeend','<div class="chat" style="margin:12px 0"><div class="avatar">PG</div><div class="bubble">'+t+'</div></div>')}function ask(){let qv=q.value.trim();if(!qv)return;chat.insertAdjacentHTML('beforeend','<div class="card"><b>You</b><p>'+qv.replace(/[<>]/g,'')+'</p></div>');coach(qv.toLowerCase().includes('today')?'Today is '+plan()[0]+'. Open Workout when you are ready.':'I’m still a prototype coach in V2, but your profile and workout data are now structured for the full AI coach.');q.value=''}
-load();update();progress();function progress(){ps.textContent=s.workouts.length;sets.textContent=s.workouts.flatMap(w=>w.e||[]).flatMap(e=>e.sets||[]).length;history.innerHTML=s.workouts.length?s.workouts.slice().reverse().map(w=>'<div style="padding:12px 0;border-bottom:1px solid var(--l)"><b>'+w.name+'</b><div class="muted">'+new Date(w.start).toLocaleDateString()+'</div></div>').join(''):'<div class="empty">Your completed workouts will appear here.</div>'}
-</script></body></html>
+const key='ypg_v1';
+let state=JSON.parse(localStorage.getItem(key)||'null')||{
+ profile:{goal:'Build muscle + get leaner',days:3,duration:'45 minutes'},
+ workouts:[], current:null
+};
+const plans=[
+ {name:'Push', exercises:[
+  {name:'Chest Press',sets:3,min:8,max:12,weight:80},
+  {name:'Shoulder Press',sets:3,min:8,max:12,weight:50},
+  {name:'Cable Triceps Pushdown',sets:3,min:10,max:15,weight:40}]},
+ {name:'Pull', exercises:[
+  {name:'Lat Pulldown',sets:3,min:8,max:12,weight:80},
+  {name:'Seated Cable Row',sets:3,min:8,max:12,weight:80},
+  {name:'Biceps Curl Machine',sets:3,min:10,max:15,weight:40}]},
+ {name:'Legs', exercises:[
+  {name:'Leg Press',sets:3,min:8,max:12,weight:180},
+  {name:'Leg Curl',sets:3,min:10,max:15,weight:60},
+  {name:'Leg Extension',sets:3,min:10,max:15,weight:60}]}
+];
+function save(){localStorage.setItem(key,JSON.stringify(state));}
+function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='progress')renderProgress();if(id==='coach')renderChat();}
+function planForToday(){return plans[state.workouts.length%plans.length]}
+function startWorkout(){
+ const p=planForToday();
+ state.current={name:p.name,start:Date.now(),exercises:p.exercises.map(e=>{
+   const prior=[...state.workouts].reverse().flatMap(w=>w.exercises||[]).find(x=>x.name===e.name);
+   let suggested=e.weight;
+   if(prior&&prior.sets.every(s=>Number(s.reps)>=e.max)) suggested=Math.round(prior.weight*1.05/5)*5;
+   return {...e,weight:suggested,sets:Array.from({length:e.sets},()=>({reps:'',done:false}))};
+ })};
+ save();renderWorkout();show('workout',document.querySelectorAll('.nav button')[1]);
+}
+function renderWorkout(){
+ if(!state.current)return;
+ document.getElementById('workoutTitle').textContent=state.current.name;
+ document.getElementById('exerciseList').innerHTML=state.current.exercises.map((e,ei)=>`
+ <div class="card exercise"><div class="row"><div><b>${e.name}</b><div class="muted small">${e.min}–${e.max} reps • Suggested ${e.weight} lb</div></div><span class="pill">${e.sets} sets</span></div>
+ ${e.sets.map((s,si)=>`<div class="setrow"><span class="small muted" style="padding:11px 0">Set ${si+1}</span><input type="number" placeholder="lb" value="${e.weight}" onchange="setWeight(${ei},${si},this.value)"><input type="number" placeholder="reps" value="${s.reps}" onchange="setReps(${ei},${si},this.value)"><button class="check ${s.done?'done':''}" onclick="toggleSet(${ei},${si},this)">${s.done?'✓':'○'}</button></div>`).join('')}</div>`).join('');
+}
+function setWeight(e,s,v){state.current.exercises[e].weight=Number(v)||0;save()}
+function setReps(e,s,v){state.current.exercises[e].sets[s].reps=v;save()}
+function toggleSet(e,s,el){state.current.exercises[e].sets[s].done=!state.current.exercises[e].sets[s].done;save();renderWorkout()}
+function finishWorkout(){
+ if(!state.current)return;
+ state.workouts.push({...state.current,end:Date.now()});state.current=null;save();updateHome();alert('Workout saved. Your next workout will adapt to your performance.');
+ show('home',document.querySelectorAll('.nav button')[0]);
+}
+let timerId;
+function startTimer(){let n=90;clearInterval(timerId);document.getElementById('timer').textContent='01:30';timerId=setInterval(()=>{n--;document.getElementById('timer').textContent=`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;if(n<=0){clearInterval(timerId);navigator.vibrate?.(300);}},1000)}
+function updateHome(){
+ document.getElementById('workoutsStat').textContent=state.workouts.length;
+ document.getElementById('pSessions').textContent=state.workouts.length;
+ document.getElementById('goalText').textContent=state.profile.goal;
+ const p=planForToday();document.getElementById('homeTitle').textContent=p.name+' — Strength & Muscle';
+ const total=p.exercises.length*3;document.getElementById('homeMeta').textContent=`${total} sets • about ${state.profile.duration.replace(' minutes','')} minutes`;
+ document.getElementById('coachNote').textContent=state.workouts.length?coachSummary():'Log a workout and I’ll start adjusting your training based on your performance.';
+ document.getElementById('streakStat').textContent=Math.min(state.workouts.length,7);
+}
+function coachSummary(){
+ const last=state.workouts.at(-1), completed=(last.exercises||[]).flatMap(e=>e.sets).filter(s=>s.done).length;
+ return `Nice work. You logged ${completed} completed sets last session. I’ll use your reps and weights to decide when you should add reps, hold steady, or increase load.`;
+}
+function renderProgress(){
+ const sets=state.workouts.flatMap(w=>w.exercises||[]).flatMap(e=>e.sets||[]).length;
+ document.getElementById('pSets').textContent=sets;
+ document.getElementById('progressFill').style.width=Math.min(100,(state.workouts.length%4)/4*100)+'%';
+ document.getElementById('history').innerHTML=state.workouts.length?state.workouts.slice().reverse().slice(0,8).map(w=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${w.name}</b><div class="muted small">${new Date(w.start).toLocaleDateString()} • ${w.exercises.length} exercises</div></div>`).join(''):'No workouts yet.';
+}
+function saveProfile(){
+ state.profile.goal=document.getElementById('goal').value;state.profile.days=Number(document.getElementById('days').value);state.profile.duration=document.getElementById('duration').value;save();updateHome();alert('Setup saved.');
+}
+function renderChat(){
+ if(document.getElementById('chat').children.length)return;
+ addCoach(`I'm your Pocket Gym coach. I can help you plan today's session, interpret your workout history, suggest progression, and adapt around time or equipment changes. What do you want to work on?`);
+}
+function addCoach(text){document.getElementById('chat').insertAdjacentHTML('beforeend',`<div class="coach" style="margin:12px 0"><div class="avatar">PG</div><div class="bubble">${text}</div></div>`)}
+function askCoach(){
+ const input=document.getElementById('chatInput'),q=input.value.trim();if(!q)return;
+ document.getElementById('chat').insertAdjacentHTML('beforeend',`<div class="card" style="margin-left:42px"><b>You</b><p>${q.replace(/[<>]/g,'')}</p></div>`);
+ let a;
+ const l=q.toLowerCase();
+ if(l.includes('today')||l.includes('workout')){const p=planForToday();a=`Today I'd run <b>${p.name}</b>. Start with ${p.exercises[0].name}, then move through the remaining ${p.exercises.length-1} exercises. Use the suggested load shown in the workout screen and try to improve your reps before adding weight.`}
+ else if(l.includes('30')||l.includes('time')) a='If you only have 30 minutes, keep the first two exercises and do 2 hard working sets each. Skip isolation work rather than rushing every set.';
+ else if(l.includes('progress')||l.includes('weight')) a=state.workouts.length?coachSummary():'Once you log a few sessions, I can make progression recommendations from your actual numbers.';
+ else a='For this first prototype I can answer common training questions and use your logged workouts. The next version can connect a real AI model so the coach can have a much deeper conversation while still seeing your training data.';
+ addCoach(a);input.value='';
+}
+document.getElementById('goal').value=state.profile.goal;document.getElementById('days').value=state.profile.days;document.getElementById('duration').value=state.profile.duration;
+updateHome();renderProgress();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
