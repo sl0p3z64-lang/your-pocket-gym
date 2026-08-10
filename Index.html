@@ -1,0 +1,1 @@
+Your Pocket Gym V2: dark sporty redesign, time-based greeting, personalized profile, custom workout builder, program modes, workout tracking, progress, and prototype coach.
