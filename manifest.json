@@ -1,10 +1,10 @@
 {
-  "name": "Your Pocket Gym",
-  "short_name": "Pocket Gym",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f4f6f8",
-  "theme_color": "#111827",
-  "description": "Your personal mobile-first workout and fitness tracker.",
-  "icons": []
+  "name":"Your Pocket Gym",
+  "short_name":"Pocket Gym",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#050b16",
+  "theme_color":"#07152b",
+  "description":"Your mobile-first workout, nutrition and progress tracker.",
+  "icons":[]
 }
