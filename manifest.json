@@ -1,1 +1,10 @@
-{"name":"Your Pocket Gym V2.1","short_name":"Pocket Gym","start_url":"./","display":"standalone","background_color":"#050b16","theme_color":"#07152b","icons":[]}
+{
+  "name": "Your Pocket Gym",
+  "short_name": "Pocket Gym",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#111827",
+  "description": "Your personal mobile-first workout and fitness tracker.",
+  "icons": []
+}
